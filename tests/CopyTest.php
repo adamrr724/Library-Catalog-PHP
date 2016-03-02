@@ -30,16 +30,13 @@
 			$id = 2;
 			$test_book = new Book($test_title, $id);
 
-            $test_type = "Hard Cover";
             $test_book_id = $test_book->getId();
 			$id = 1;
-			$test_copy = new Copy($test_type, $test_book_id, $id);
+			$test_copy = new Copy($test_book_id, $id);
 
-			$result1 = $test_copy->getType();
 			$result2 = $test_copy->getBookId();
 			$result3 = $test_copy->getId();
 
-			$this->assertEquals("Hard Cover", $result1);
 			$this->assertEquals(2, $result2);
 			$this->assertEquals(1, $result3);
 
@@ -51,10 +48,9 @@
 			$id = 2;
 			$test_book = new Book($test_title, $id);
 
-            $test_type = "Hard Cover";
             $test_book_id = $test_book->getId();
 			$id = null;
-			$test_copy = new Copy($test_type, $test_book_id, $id);
+			$test_copy = new Copy($test_book_id, $id);
             $test_copy->save();
 
 
@@ -69,16 +65,14 @@
 			$id = 2;
 			$test_book = new Book($test_title, $id);
 
-            $test_type = "Hard Cover";
             $test_book_id = $test_book->getId();
 			$id = null;
-			$test_copy = new Copy($test_type, $test_book_id, $id);
+			$test_copy = new Copy($test_book_id, $id);
             $test_copy->save();
 
-            $test_type2 = "Soft Cover";
             $test_book_id2 = $test_book->getId();
             $id = null;
-            $test_copy2 = new Copy($test_type2, $test_book_id2, $id);
+            $test_copy2 = new Copy($test_book_id2, $id);
             $test_copy2->save();
 
             $result = Copy::getAll();
@@ -92,16 +86,14 @@
 			$id = 2;
 			$test_book = new Book($test_title, $id);
 
-            $test_type = "Hard Cover";
             $test_book_id = $test_book->getId();
 			$id = null;
-			$test_copy = new Copy($test_type, $test_book_id, $id);
+			$test_copy = new Copy($test_book_id, $id);
             $test_copy->save();
 
-            $test_type2 = "Soft Cover";
             $test_book_id2 = $test_book->getId();
             $id = null;
-            $test_copy2 = new Copy($test_type2, $test_book_id2, $id);
+            $test_copy2 = new Copy($test_book_id2, $id);
             $test_copy2->save();
 
             Copy::deleteAll();
@@ -115,16 +107,14 @@
             $id = 2;
             $test_book = new Book($test_title, $id);
 
-            $test_type = "Hard Cover";
             $test_book_id = $test_book->getId();
             $id = null;
-            $test_copy = new Copy($test_type, $test_book_id, $id);
+            $test_copy = new Copy($test_book_id, $id);
             $test_copy->save();
 
-            $test_type2 = "Soft Cover";
             $test_book_id2 = $test_book->getId();
             $id = null;
-            $test_copy2 = new Copy($test_type2, $test_book_id2, $id);
+            $test_copy2 = new Copy($test_book_id2, $id);
             $test_copy2->save();
 
             $result = Copy::find($test_copy->getId());

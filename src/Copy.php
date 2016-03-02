@@ -1,26 +1,14 @@
 <?php
 	class Copy
 		{
-		private $type;
 		private $book_id;
 		private $id;
 
-		function __construct($type, $book_id, $id = null)
+		function __construct($book_id, $id = null)
 		{
-			$this->type = $type;
 			$this->book_id = $book_id;
 			$this->id = $id;
 		}
-
-		function getType()
-		{
-			return $this->type;
-		}
-
-        function setType()
-        {
-            $this->type = $type;
-        }
 
 		function setBookId()
 		{
@@ -39,7 +27,7 @@
 
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO copies (type, book_id) VALUES ('{$this->getType()}', '{$this->getBookId()}');");
+            $GLOBALS['DB']->exec("INSERT INTO copies (book_id) VALUES ('{$this->getBookId()}');");
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
@@ -48,10 +36,9 @@
             $returned_copies = $GLOBALS['DB']->query("SELECT * FROM copies");
             $copies = array();
             foreach($returned_copies as $copy){
-                 $type = $copy['type'];
                  $book_id = $copy['book_id'];
                  $id = $copy['id'];
-                 $new_copy = new Copy($type, $book_id, $id);
+                 $new_copy = new Copy($book_id, $id);
                  array_push($copies, $new_copy);
             }
             return $copies;
