@@ -1,10 +1,28 @@
 <?php
+    /**
+    * @backupGlobals disabled
+    * @backupStaticAttributes disabled
+    */
 
+    require_once 'src/Book.php';
+	require_once 'src/Author.php';
+	require_once 'src/Patron.php';
 	require_once 'src/Copy.php';
-	require_once 'src/Book.php';
+
+    $server = 'mysql:host=localhost;dbname=library_catalog_test';
+    $username = 'root';
+    $password = 'root';
+    $DB = new PDO($server, $username, $password);
 
 	class CopyTest extends PHPUnit_Framework_TestCase
 	{
+        protected function tearDown()
+        {
+            Book::deleteAll();
+            // Author::deleteAll();
+            // Patron::deleteAll();
+            // Copy::deleteAll();
+        }
 
 		function test_getters()
 		{
