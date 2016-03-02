@@ -106,5 +106,28 @@
             }
             return $books;
         }
+
+        function delete()
+		{
+		   $GLOBALS['DB']->exec("DELETE FROM authors WHERE id = {$this->getId()};");
+		   $GLOBALS['DB']->exec("DELETE FROM books_authors WHERE authors_id = {$this->getId()};");
+
+		}
+
+        static function search($search_term)
+		{
+			$query = $GLOBALS['DB']->query("SELECT * FROM authors WHERE last_name LIKE '%{$search_term}%'");
+			$all_authors = $query->fetchAll(PDO::FETCH_ASSOC);
+
+			$found_authors = array();
+			foreach ($all_authors as $author) {
+				$first_name = $author['first_name'];
+				$last_name = $author['last_name'];
+				$id = $author['id'];
+				$new_author = new Author($first_name, $last_name, $id);
+				array_push($found_authors, $new_author);
+			}
+			return $found_authors;
+		}
 	}
  ?>

@@ -181,6 +181,46 @@
 
             $this->assertEquals($test_author->getBooks(), [$test_book, $test_book2]);
         }
+
+        function test_search()
+		{
+            $first_name = "Lois";
+			$last_name = "Lowry";
+			$id = null;
+			$test_author = new Author($first_name, $last_name, $id);
+            $test_author->save();
+
+            $first_name2 = "Henry David";
+			$last_name2 = "Thoreau";
+			$test_author2 = new Author($first_name2, $last_name2, $id);
+            $test_author2->save();
+
+			$search_term = "Lo";
+
+			$result = Author::search($search_term);
+
+			$this->assertEquals([$test_author], $result);
+		}
+
+		function test_delete()
+        {
+            $first_name = "Lois";
+			$last_name = "Lowry";
+			$id = null;
+			$test_author = new Author($first_name, $last_name, $id);
+            $test_author->save();
+
+            $first_name2 = "Henry David";
+			$last_name2 = "Thoreau";
+			$test_author2 = new Author($first_name2, $last_name2, $id);
+            $test_author2->save();
+
+            $test_author->delete();
+            $result = Author::getAll();
+
+            $this->assertEquals([$test_author2], $result);
+        }
+
 	}
 
 ?>

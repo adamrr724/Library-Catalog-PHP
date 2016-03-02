@@ -6,6 +6,33 @@
     </head>
     <body>
         <h1>Authors</h1>
+        {% if authors is not empty %}
+           <ul>
+           {% for author in authors %}
+                   <h3>{{ author.getFirstName }} {{ author.getLastName }}</h3>
+                   {% if author.getBooks is not empty %}
+                   <ul>
+                       {% for book in author.getBooks %}
+                       <li>{{ book.getTitle }} </li>
+                       {% endfor %}
+                   </ul>
+                   {% else %}
+                       <p>This author has no books.</p>
+                   {% endif %}
+                    <p><a href="/authors/{{ author.getId }}/edit">Edit this Author</a></p>
+                   </form>
+           {% endfor %}
+           </ul>
+        {% else %}
+        <p>
+           No authors added yet!
+        </p>
+        {% endif %}
+        <form action="/authors/search" method="get">
+            <label for="title">Search by Author Last Name</label>
+            <input type="text" name="title">
+            <button type="submit" name="button">Search</button>
+        </form>
 
         <p>
             <a href="/">HOME</a>
