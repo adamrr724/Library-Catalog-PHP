@@ -19,7 +19,7 @@
 		protected function tearDown()
 		{
 			Book::deleteAll();
-			// Author::deleteAll();
+			Author::deleteAll();
 			// Patron::deleteAll();
 			// Copy::deleteAll();
 		}

@@ -19,7 +19,7 @@
         protected function tearDown()
         {
             Book::deleteAll();
-            // Author::deleteAll();
+            Author::deleteAll();
             // Patron::deleteAll();
             // Copy::deleteAll();
         }
@@ -40,6 +40,55 @@
 			$this->assertEquals(1, $result3);
 
 		}
+
+        function test_save()
+        {
+            $first_name = "Lois";
+			$last_name = "Lowry";
+			$id = 1;
+			$test_author = new Author($first_name, $last_name, $id);
+            $test_author->save();
+
+            $result = Author::getAll();
+
+            $this->assertEquals([$test_author], $result);
+        }
+
+        function test_getAll()
+        {
+            $first_name = "Lois";
+			$last_name = "Lowry";
+			$id = null;
+			$test_author = new Author($first_name, $last_name, $id);
+            $test_author->save();
+
+            $first_name2 = "Henry David";
+			$last_name2 = "Thoreau";
+			$test_author2 = new Author($first_name2, $last_name2, $id);
+            $test_author2->save();
+
+            $result = Author::getAll();
+
+            $this->assertEquals([$test_author, $test_author2], $result);
+        }
+
+        function test_deleteAll()
+        {
+            $first_name = "Lois";
+			$last_name = "Lowry";
+			$id = null;
+			$test_author = new Author($first_name, $last_name, $id);
+            $test_author->save();
+
+            $first_name2 = "Henry David";
+			$last_name2 = "Thoreau";
+			$test_author2 = new Author($first_name2, $last_name2, $id);
+            $test_author2->save();
+
+            Author::deleteAll();
+
+            $this->assertEquals([], Author::getAll());
+        }
 	}
 
 ?>
