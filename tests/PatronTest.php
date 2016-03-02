@@ -100,6 +100,20 @@
 
             $this->assertEquals($test_patron, $result);
         }
+
+        function test_update()
+        {
+            $test_name = "John Fisher";
+            $id = null;
+            $test_patron = new Patron($test_name, $id);
+            $test_patron->save();
+
+            $new_name = "Jimmy Hendrix";
+
+            $test_patron->update($new_name);
+
+            $this->assertEquals($new_name, $test_patron->getName());
+        }
 	}
 
 ?>

@@ -75,5 +75,17 @@
             }
             return $found_author;
         }
+
+        function updateFirstName($new_first_name)
+        {
+           $GLOBALS['DB']->exec("UPDATE books SET first_name = '{$new_first_name}' WHERE id={$this->getId()};");
+           $this->setFirstName($new_first_name);
+        }
+
+        function updateLastName($new_last_name)
+        {
+           $GLOBALS['DB']->exec("UPDATE books SET last_name = '{$new_last_name}' WHERE id={$this->getId()};");
+           $this->setLastName($new_last_name);
+        }
 	}
  ?>

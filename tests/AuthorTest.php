@@ -107,6 +107,36 @@
 
             $this->assertEquals($test_author, $result);
         }
+
+        function test_updateFirst()
+        {
+            $first_name = "Lois";
+            $last_name = "Lowry";
+            $id = null;
+            $test_author = new Author($first_name, $last_name, $id);
+            $test_author->save();
+
+            $new_first_name = "Jane";
+
+            $test_author->updateFirstName($new_first_name);
+
+            $this->assertEquals($new_first_name, $test_author->getFirstName());
+        }
+
+        function test_updateLast()
+        {
+            $first_name = "Lois";
+            $last_name = "Lowry";
+            $id = null;
+            $test_author = new Author($first_name, $last_name, $id);
+            $test_author->save();
+
+            $new_last_name = "Fonda";
+
+            $test_author->updateLastName($new_last_name);
+
+            $this->assertEquals($new_last_name, $test_author->getLastName());
+        }
 	}
 
 ?>
