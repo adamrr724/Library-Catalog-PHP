@@ -78,6 +78,12 @@
         return $app['twig']->render('books.html.twig', array('books' => Book::getAll()));
     });
 
+    $app->delete("/book/{id}/delete", function($id)use ($app) {
+        $book = Book::find($id);
+        $book->delete();
+        return $app['twig']->render('books.html.twig', array('books' => Book::getAll()));
+    });
+
     $app->get("/authors", function() use ($app) {
        return $app['twig']->render('authors.html.twig', array('authors' => Author::getAll()));
    });

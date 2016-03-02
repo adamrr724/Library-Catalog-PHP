@@ -22,6 +22,11 @@
             <input type="text" name="last_name">
             <button type="submit" name="button">Add</button>
         </form>
+<br>
+        <form action="/book/{{ book.getId }}/delete" method="post">
+             <input name="_method" type="hidden" value="delete">
+            <button type="submit" name="button">Delete Button</button>
+        </form>
         <p>
             <a href="/">HOME</a>
         </p>
