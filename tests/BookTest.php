@@ -8,8 +8,8 @@
 		function test_getters()
 		{
 			$test_title = "The Magicians";
-			$test_id = 1;
-			$test_book = new Book($test_title, $test_id);
+			$id = 1;
+			$test_book = new Book($test_title, $id);
 
 			$result1 = $test_book->getTitle();
 			$result2 = $test_book->getId();
