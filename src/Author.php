@@ -17,9 +17,9 @@
 			return $this->first_name;
 		}
 
-		function setFirstName()
+		function setFirstName($new_first_name)
 		{
-			$this->first_name = $first_name;
+			$this->first_name = $new_first_name;
 		}
 
         function getLastName()
@@ -27,9 +27,9 @@
 			return $this->last_name;
 		}
 
-		function setLastName()
+		function setLastName($new_last_name)
 		{
-			$this->last_name = $last_name;
+			$this->last_name = $new_last_name;
 		}
 
 		function getId()
@@ -62,6 +62,7 @@
             $GLOBALS['DB']->exec("DELETE FROM authors");
         }
 
+        // FIND A SPECIFIC AUTHOR BY ID
         static function find($id)
         {
             $all_authors = Author::getAll();

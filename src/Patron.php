@@ -15,9 +15,9 @@
 			return $this->name;
 		}
 
-		function setName()
+		function setName($new_name)
 		{
-			$this->name = $name;
+			$this->name = $new_name;
 		}
 
 		function getId()
@@ -49,6 +49,7 @@
             $GLOBALS['DB']->exec("DELETE FROM patrons");
         }
 
+        // FIND A SPECIFIC PATRON BY ID
         static function find($id)
         {
             $all_patrons = Patron::getAll();

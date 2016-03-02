@@ -10,9 +10,9 @@
 			$this->id = $id;
 		}
 
-		function setBookId()
+		function setBookId($new_book_id)
 		{
-			$this->book_id = $book_id;
+			$this->book_id = $new_book_id;
 		}
 
         function getBookId()
@@ -49,6 +49,7 @@
             $GLOBALS['DB']->exec("DELETE FROM copies");
         }
 
+        // FIND A SPECIFIC COPY BY ID
         static function find($id)
         {
             $all_copies = Copy::getAll();

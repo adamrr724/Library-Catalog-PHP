@@ -15,9 +15,9 @@
 			return $this->title;
 		}
 
-		function setTitle()
+		function setTitle($new_title)
 		{
-			$this->title = $title;
+			$this->title = $new_title;
 		}
 
 		function getId()
@@ -49,6 +49,7 @@
 			$GLOBALS['DB']->exec("DELETE FROM books");
 		}
 
+		// FIND A SPECIFIC BOOK BY ID
 		static function find($id)
 		{
 			$all_books = Book::getAll();
@@ -60,6 +61,12 @@
 				}
 			}
 			return $found_book;
+		}
+
+		function update($new_title)
+		{
+		   $GLOBALS['DB']->exec("UPDATE books SET title = '{$new_title}' WHERE id={$this->getId()};");
+		   $this->setTitle($new_title);
 		}
 	}
  ?>

@@ -98,6 +98,20 @@
 			$this->assertEquals($test_book, $result);
 		}
 
+		function test_update()
+		{
+			$test_title = "The Magicians";
+			$id = null;
+			$test_book = new Book($test_title, $id);
+		    $test_book->save();
+
+		    $new_title = "Science";
+
+		    $test_book->update($new_title);
+
+		   	$this->assertEquals($new_title, $test_book->getTitle());
+		}
+
 
 
 	}
