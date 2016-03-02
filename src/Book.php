@@ -68,5 +68,25 @@
 		   $GLOBALS['DB']->exec("UPDATE books SET title = '{$new_title}' WHERE id={$this->getId()};");
 		   $this->setTitle($new_title);
 		}
+
+		function addAuthor($author)
+		{
+			$GLOBALS['DB']->exec("INSERT INTO books_authors (book_id, author_id) VALUES ({$this->getId()}, {$author->getId()}) ;");
+		}
+
+		function getAuthors()
+		{
+			$query = $GLOBALS['DB']->query("SELECT authors.* FROM books JOIN books_authors ON (books.id = books_authors.book_id) JOIN authors ON (books_authors.author_id = authors.id) WHERE books.id = {$this->getId()}; ");
+			$returned_authors = $query->fetchAll(PDO::FETCH_ASSOC);
+			$authors = array();
+			foreach($returned_authors as $author){
+				$first_name = $author['first_name'];
+				$last_name = $author['last_name'];
+				$id = $author['id'];
+				$new_author = new Author($first_name, $last_name, $id);
+				array_push( $authors, $new_author);
+			}
+			return $authors;
+		}
 	}
  ?>
