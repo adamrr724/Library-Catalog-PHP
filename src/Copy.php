@@ -36,5 +36,30 @@
 		{
 			return $this->id;
 		}
+
+        function save()
+        {
+            $GLOBALS['DB']->exec("INSERT INTO copies (type, book_id) VALUES ('{$this->getType()}', '{$this->getBookId()}');");
+            $this->id = $GLOBALS['DB']->lastInsertId();
+        }
+
+        static function getAll()
+        {
+            $returned_copies = $GLOBALS['DB']->query("SELECT * FROM copies");
+            $copies = array();
+            foreach($returned_copies as $copy){
+                 $type = $copy['type'];
+                 $book_id = $copy['book_id'];
+                 $id = $copy['id'];
+                 $new_copy = new Copy($type, $book_id, $id);
+                 array_push($copies, $new_copy);
+            }
+            return $copies;
+        }
+
+        static function deleteAll()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM copies");
+        }
 	}
  ?>
