@@ -21,7 +21,7 @@
             Book::deleteAll();
             Author::deleteAll();
             Patron::deleteAll();
-            // Copy::deleteAll();
+            Copy::deleteAll();
         }
 
 		function test_getters()

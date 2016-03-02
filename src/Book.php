@@ -88,5 +88,20 @@
 			}
 			return $authors;
 		}
+
+		static function search($search_term)
+		{
+			$query = $GLOBALS['DB']->query("SELECT * FROM books WHERE title LIKE '%{$search_term}%'");
+			$all_books = $query->fetchAll(PDO::FETCH_ASSOC);
+
+			$found_books = array();
+			foreach ($all_books as $book) {
+				$title = $book['title'];
+				$id = $book['id'];
+				$new_book = new Book($title, $id);
+				array_push($found_books, $new_book);
+			}
+			return $found_books;
+		}
 	}
  ?>

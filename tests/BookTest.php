@@ -21,7 +21,7 @@
 			Book::deleteAll();
 			Author::deleteAll();
 			Patron::deleteAll();
-			// Copy::deleteAll();
+			Copy::deleteAll();
 		}
 
 		function test_getters()
@@ -154,6 +154,24 @@
 			$test_book->addAuthor($test_author2);
 
 			$this->assertEquals($test_book->getAuthors(), [$test_author, $test_author2]);
+		}
+
+		function test_search()
+		{
+			$test_title = "The Magicians";
+			$id = null;
+			$test_book = new Book($test_title, $id);
+			$test_book->save();
+
+			$test_title2 = "Moby Dick";
+			$test_book2 = new Book($test_title2, $id);
+			$test_book2->save();
+
+			$search_term = "The";
+
+			$result = Book::search($search_term);
+
+			$this->assertEquals([$test_book], $result);
 		}
 
     }
