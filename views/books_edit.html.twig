@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Library Catalog</title>
+    </head>
+    <body>
+        <h1>Edit {{ book.getTitle }}</h1>
+        <h3>Update Book Title</h3>
+        <form action="/book/{{ book.getId }}/edit_title" method="post">
+             <input name="_method" type="hidden" value="patch">
+            <label for="title">New Title</label>
+            <input type="text" name="title" value="">
+            <button type="submit" name="button">Update!</button>
+        </form>
+        <h3>Add an Author</h3>
+        <form action="/book/{{ book.getId }}/add_author" method="post">
+             <input name="_method" type="hidden" value="patch">
+             <label for="first_name">Author First Name</label>
+             <input type="text" name="first_name">
+            <label for="last_name">Author Last Name</label>
+            <input type="text" name="last_name">
+            <button type="submit" name="button">Add</button>
+        </form>
+        <p>
+            <a href="/">HOME</a>
+        </p>
+    </body>
+</html>

@@ -174,6 +174,23 @@
 			$this->assertEquals([$test_book], $result);
 		}
 
+		function test_delete()
+        {
+			$test_title = "The Magicians";
+			$id = null;
+			$test_book = new Book($test_title, $id);
+			$test_book->save();
+
+			$test_title2 = "Moby Dick";
+			$test_book2 = new Book($test_title2, $id);
+			$test_book2->save();
+
+            $test_book->delete();
+            $result = Book::getAll();
+
+            $this->assertEquals([$test_book2], $result);
+        }
+
     }
 
 ?>

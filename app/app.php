@@ -34,6 +34,50 @@
         return $app['twig']->render('books.html.twig', array('books' => Book::getAll()));
     });
 
+    $app->get("/books/search", function() use ($app) {
+        $search_term = $_GET['title'];
+        $books = Book::search($search_term);
+        return $app['twig']->render('books.html.twig', array('books' => $books));
+    });
+
+    $app->get("/books/add", function() use ($app) {
+        return $app['twig']->render('books_add.html.twig');
+    });
+
+    $app->post("/books/addbook", function() use ($app) {
+        $title = $_POST['title'];
+        $new_book = new Book($title);
+        $new_book->save();
+        $first_name = $_POST['first_name'];
+        $last_name = $_POST['last_name'];
+        $new_author = new Author($first_name, $last_name);
+        $new_author->save();
+        $new_book->addAuthor($new_author);
+        return $app['twig']->render('books.html.twig', array('books' => Book::getAll()));
+    });
+
+    $app->get("/books/{id}/edit", function($id)use ($app) {
+        $book = Book::find($id);
+        return $app['twig']->render('books_edit.html.twig', array('book' => $book));
+    });
+
+    $app->patch("/book/{id}/edit_title", function($id)use ($app) {
+        $title = $_POST['title'];
+        $book = Book::find($id);
+        $book->update($title);
+        return $app['twig']->render('books.html.twig', array('books' => Book::getAll()));
+    });
+
+    $app->patch("/book/{id}/add_author", function($id)use ($app) {
+        $book = Book::find($id);
+        $first_name = $_POST['first_name'];
+        $last_name = $_POST['last_name'];
+        $new_author = new Author($first_name, $last_name);
+        $new_author->save();
+        $book->addAuthor($new_author);
+        return $app['twig']->render('books.html.twig', array('books' => Book::getAll()));
+    });
+
     $app->get("/authors", function() use ($app) {
        return $app['twig']->render('authors.html.twig', array('authors' => Author::getAll()));
    });

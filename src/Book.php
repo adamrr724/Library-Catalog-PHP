@@ -69,6 +69,13 @@
 		   $this->setTitle($new_title);
 		}
 
+		function delete()
+		{
+		   $GLOBALS['DB']->exec("DELETE FROM books WHERE id = {$this->getId()};");
+		   $GLOBALS['DB']->exec("DELETE FROM books_authors WHERE book_id = {$this->getId()};");
+
+		}
+
 		function addAuthor($author)
 		{
 			$GLOBALS['DB']->exec("INSERT INTO books_authors (book_id, author_id) VALUES ({$this->getId()}, {$author->getId()}) ;");

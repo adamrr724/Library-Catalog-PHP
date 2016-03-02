@@ -6,9 +6,36 @@
     </head>
     <body>
         <h1>Books</h1>
-        <form class="" action="index.html" method="post">
-
+        {% if books is not empty %}
+           <ul>
+           {% for book in books %}
+                   <h3>{{ book.getTitle }}</h3>
+                   {% if book.getAuthors is not empty %}
+                   <ul>
+                       {% for author in book.getAuthors %}
+                       <li>{{ author.getFirstName }} {{ author.getLastName }}</li>
+                       {% endfor %}
+                   </ul>
+                   {% else %}
+                       <p>This book has no authors.</p>
+                   {% endif %}
+                    <p><a href="/books/{{ book.getId }}/edit">Edit this Book</a></p>
+                   </form>
+           {% endfor %}
+           </ul>
+       {% else %}
+       <p>
+           No books added yet!
+       </p>
+       {% endif %}
+        <form action="/books/search" method="get">
+            <label for="title">Book Title</label>
+            <input type="text" name="title">
+            <button type="submit" name="button">Search</button>
         </form>
+        <p>
+            <a href="/books/add">Add</a> a Book to the Catalog
+        </p>
         <p>
             <a href="/">HOME</a>
         </p>
