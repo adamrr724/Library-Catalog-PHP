@@ -88,6 +88,32 @@
        return $app['twig']->render('authors.html.twig', array('authors' => Author::getAll()));
    });
 
+   $app->get("/authors/search", function() use ($app) {
+       $search_term = $_GET['title'];
+       $authors = Author::search($search_term);
+       return $app['twig']->render('authors.html.twig', array('authors' => $authors));
+   });
+
+   $app->get("/authors/{id}/edit", function($id)use ($app) {
+       $author = Author::find($id);
+       return $app['twig']->render('authors_edit.html.twig', array('author' => $author));
+   });
+
+   $app->patch("/author/{id}/edit_title", function($id)use ($app) {
+       $first_name = $_POST['first_name'];
+       $last_name = $_POST['last_name'];
+       $author = Author::find($id);
+       $author->updateFirstName($first_name);
+       $author->updateLastName($last_name);
+       return $app['twig']->render('authors.html.twig', array('authors' => Author::getAll()));
+   });
+
+   $app->delete("/author/{id}/delete", function($id)use ($app) {
+       $author = Author::find($id);
+       $author->delete();
+       return $app['twig']->render('authors.html.twig', array('authors' => Author::getAll()));
+   });
+
     return $app;
 
  ?>
