@@ -82,6 +82,22 @@
             $this->assertEquals([], Book::getAll());
         }
 
+		function test_find()
+		{
+			$test_title = "The Magicians";
+			$id = null;
+			$test_book = new Book($test_title, $id);
+		    $test_book->save();
+
+            $test_title2 = "Moby Dick";
+            $test_book2 = new Book($test_title2, $id);
+            $test_book2->save();
+
+			$result = Book::find($test_book->getId());
+
+			$this->assertEquals($test_book, $result);
+		}
+
 
 
 	}

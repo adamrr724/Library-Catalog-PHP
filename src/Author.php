@@ -61,5 +61,18 @@
         {
             $GLOBALS['DB']->exec("DELETE FROM authors");
         }
+
+        static function find($id)
+        {
+            $all_authors = Author::getAll();
+            $found_author = null;
+            foreach($all_authors as $author) {
+                $author_id = $author->getId();
+                if ($author_id == $id) {
+                    $found_author = $author;
+                }
+            }
+            return $found_author;
+        }
 	}
  ?>

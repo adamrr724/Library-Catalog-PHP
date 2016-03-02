@@ -83,6 +83,23 @@
 
             $this->assertEquals([], Patron::getAll());
         }
+
+        function test_find()
+        {
+            $test_name = "John Fisher";
+			$id = null;
+			$test_patron = new Patron($test_name, $id);
+            $test_patron->save();
+
+            $test_name2 = "Paul Allen";
+			$id = null;
+			$test_patron2 = new Patron($test_name, $id);
+            $test_patron2->save();
+
+            $result = Patron::find($test_patron->getId());
+
+            $this->assertEquals($test_patron, $result);
+        }
 	}
 
 ?>
