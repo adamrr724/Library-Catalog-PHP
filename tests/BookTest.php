@@ -20,7 +20,7 @@
 		{
 			Book::deleteAll();
 			Author::deleteAll();
-			// Patron::deleteAll();
+			Patron::deleteAll();
 			// Copy::deleteAll();
 		}
 

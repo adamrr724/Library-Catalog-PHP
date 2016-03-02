@@ -20,7 +20,7 @@
         {
             Book::deleteAll();
             Author::deleteAll();
-            // Patron::deleteAll();
+            Patron::deleteAll();
             // Copy::deleteAll();
         }
 
@@ -37,6 +37,52 @@
 			$this->assertEquals(1, $result2);
 
 		}
+
+        function test_save()
+        {
+            $test_name = "John Fisher";
+			$id = null;
+			$test_patron = new Patron($test_name, $id);
+            $test_patron->save();
+
+            $result = Patron::getAll();
+
+            $this->assertEquals([$test_patron], $result);
+        }
+
+        function test_getAll()
+        {
+            $test_name = "John Fisher";
+			$id = null;
+			$test_patron = new Patron($test_name, $id);
+            $test_patron->save();
+
+            $test_name2 = "Paul Allen";
+			$id = null;
+			$test_patron2 = new Patron($test_name, $id);
+            $test_patron2->save();
+
+            $result = Patron::getAll();
+
+            $this->assertEquals([$test_patron, $test_patron2], $result);
+        }
+
+        function test_deleteAll()
+        {
+            $test_name = "John Fisher";
+			$id = null;
+			$test_patron = new Patron($test_name, $id);
+            $test_patron->save();
+
+            $test_name2 = "Paul Allen";
+			$id = null;
+			$test_patron2 = new Patron($test_name, $id);
+            $test_patron2->save();
+
+            Patron::deleteAll();
+
+            $this->assertEquals([], Patron::getAll());
+        }
 	}
 
 ?>
