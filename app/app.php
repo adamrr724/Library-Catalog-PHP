@@ -53,6 +53,7 @@
         $new_author = new Author($first_name, $last_name);
         $new_author->save();
         $new_book->addAuthor($new_author);
+        $new_book->addCopy();
         return $app['twig']->render('books.html.twig', array('books' => Book::getAll()));
     });
 
@@ -84,6 +85,12 @@
         return $app['twig']->render('books.html.twig', array('books' => Book::getAll()));
     });
 
+    $app->post("/book/{id}/add_copy", function($id)use ($app) {
+        $book = Book::find($id);
+        $book->addCopy();
+        return $app['twig']->render('books.html.twig', array('books' => Book::getAll()));
+    });
+
     $app->get("/authors", function() use ($app) {
        return $app['twig']->render('authors.html.twig', array('authors' => Author::getAll()));
    });
@@ -98,6 +105,22 @@
        $author = Author::find($id);
        return $app['twig']->render('authors_edit.html.twig', array('author' => $author));
    });
+
+   $app->get("/author/{id}/addbook", function($id)use ($app) {
+       $author = Author::find($id);
+       return $app['twig']->render('author_addbook.html.twig', array('author' => $author));
+   });
+
+   $app->post("/author/{id}/addbook", function($id)use ($app) {
+     $author = Author::find($id);
+     $title = $_POST['title'];
+     $new_book = new Book($title);
+     $new_book->save();
+     $author->addBook($new_book);
+     $new_book->addCopy();
+     return $app['twig']->render('authors.html.twig', array('authors' => Author::getAll()));
+ });
+
 
    $app->patch("/author/{id}/edit_title", function($id)use ($app) {
        $first_name = $_POST['first_name'];
@@ -124,7 +147,7 @@
         $patron->save();
         $patrons = array();
         array_push($patrons, $patron);
-       return $app['twig']->render('patron.html.twig', $arrayName = array('patrons' => $patrons));
+       return $app['twig']->render('patron.html.twig', array('patrons' => $patrons));
     });
 
     $app->get("/patrons/search", function() use ($app) {
@@ -132,6 +155,35 @@
         $patrons = Patron::search($search_term);
         return $app['twig']->render('patron.html.twig', array('patrons' => $patrons));
     });
+
+    $app->delete("/patron/{id}/delete", function($id)use ($app) {
+        $patron = Patron::find($id);
+        $patron->delete();
+        return $app['twig']->render('sign_in.html.twig');
+    });
+
+    $app->get("/patron/{id}/checkout", function($id) use ($app) {
+       $patron = Patron::find($id);
+       return $app['twig']->render('checkout_book.html.twig', array('patron' => $patron));
+    });
+
+    $app->get("/patron/{id}/books/search", function($id) use ($app) {
+       $patron = Patron::find($id);
+       $search_term = $_GET['title'];
+       $books = Book::search($search_term);
+       return $app['twig']->render('checkout_searchbook.html.twig', array('patron' => $patron,'books' => $books));
+    });
+
+    $app->get("/patron/{id}/authors/search", function($id) use ($app) {
+       $patron = Patron::find($id);
+       $search_term = $_GET['last_name'];
+       $authors = Author::search($search_term);
+       return $app['twig']->render('checkout_searchauthor.html.twig', array('patron' => $patron, 'authors' => $authors));
+    });
+
+
+
+
 
     return $app;
 

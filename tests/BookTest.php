@@ -204,6 +204,18 @@
 				$this->assertEquals(2, $test_book->countCopies());
 				}
 
+				function test_countCopies()
+				{
+				$test_title = "The Magicians";
+				$id = 2;
+				$test_book = new Book($test_title, $id);
+				$test_book->save();
+
+				$test_book->addCopy();
+
+				$this->assertEquals(1, $test_book->countCopies());
+				}
+
     }
 
 ?>

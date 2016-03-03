@@ -13,19 +13,32 @@
         <title>Library Catalog</title>
     </head>
     <body>
-        <h1>Library Catalog</h1>
+        <h1>Books Search for Checkout</h1>
+        {% if books is not empty %}
+           <ul>
+           {% for book in books %}
+                   <h3>{{ book.getTitle }}</h3>
+                   {% if book.getAuthors is not empty %}
+                   <ul>
+                       {% for author in book.getAuthors %}
+                       <li>{{ author.getFirstName }} {{ author.getLastName }}</li>
+                       <li>Copies of this book: {{ book.countCopies }}</li>
+                       {% endfor %}
+                   </ul>
+                   {% else %}
+                       <p>This book has no authors.</p>
+                   {% endif %}
+                    <p><a href="/">Check this book out!</a></p>
+                   </form>
+           {% endfor %}
+           </ul>
+       {% else %}
+       <p>
+           No books by that name!
+       </p>
+       {% endif %}
         <p>
-            Welcome to the Library Catalog. Your options are listed below.
+            <a href="/">HOME</a>
         </p>
-        <p>
-            Find a <a href="/books">BOOK</a>.
-        </p>
-        <p>
-            Search for an <a href="/authors">AUTHOR</a>.
-        </p>
-        <p>
-            <a href="/patrons">SIGN IN</a>
-        </p>
-
     </body>
 </html>

@@ -13,19 +13,15 @@
         <title>Library Catalog</title>
     </head>
     <body>
-        <h1>Library Catalog</h1>
-        <p>
-            Welcome to the Library Catalog. Your options are listed below.
-        </p>
-        <p>
-            Find a <a href="/books">BOOK</a>.
-        </p>
-        <p>
-            Search for an <a href="/authors">AUTHOR</a>.
-        </p>
-        <p>
-            <a href="/patrons">SIGN IN</a>
-        </p>
+         <h3>Add a book by {{ author.getFirstName }} {{ author.getLastName }}</h3>
 
+         <form action="/author/{{ author.getId }}/addbook" method="post">
+           <label for="title">Book Title</label>
+           <input type="text" name="title" value="">
+           <button type="submit" name="button">Add book</button>
+         </form>
+        <p>
+            <a href="/">HOME</a>
+        </p>
     </body>
 </html>

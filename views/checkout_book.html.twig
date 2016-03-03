@@ -13,19 +13,25 @@
         <title>Library Catalog</title>
     </head>
     <body>
-        <h1>Library Catalog</h1>
-        <p>
-            Welcome to the Library Catalog. Your options are listed below.
-        </p>
-        <p>
-            Find a <a href="/books">BOOK</a>.
-        </p>
-        <p>
-            Search for an <a href="/authors">AUTHOR</a>.
-        </p>
-        <p>
-            <a href="/patrons">SIGN IN</a>
-        </p>
+        <h1>Welcome {{ patron.getName }} to the Checkout Page</h1>
+        <h3>Please search for the book you would like to checkout:</h3>
 
+        <form action="/patron/{{ patron.getId }}/books/search" method="get">
+            <label for="title">Book Title</label>
+            <input type="text" name="title">
+            <button type="submit" name="button">Search</button>
+        </form>
+        <h3>Or look by author:</h3>
+        <form action="/patron/{{ patron.getId }}/authors/search" method="get">
+            <label for="last_name">Author Last Name</label>
+            <input type="text" name="last_name">
+            <button type="submit" name="button">Search</button>
+        </form>
+        <p>
+            <a href="/books/add">Add</a> a Book to the Catalog
+        </p>
+        <p>
+            <a href="/">HOME</a>
+        </p>
     </body>
 </html>
