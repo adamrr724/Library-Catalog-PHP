@@ -114,6 +114,16 @@
        return $app['twig']->render('authors.html.twig', array('authors' => Author::getAll()));
    });
 
+    $app->get("/patrons", function() use ($app) {
+       return $app['twig']->render('sign_in.html.twig');
+    });
+
+    $app->post("/patrons/add", function() use ($app) {
+        $name = $_POST['name'];
+        $patron = new Patron($name);
+       return $app['twig']->render('patron.html.twig', $arrayName = array('patron' => $patron));
+    });
+
     return $app;
 
  ?>

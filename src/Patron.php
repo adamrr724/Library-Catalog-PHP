@@ -68,5 +68,20 @@
            $GLOBALS['DB']->exec("UPDATE patrons SET name = '{$new_name}' WHERE id={$this->getId()};");
            $this->setName($new_name);
         }
+
+        static function search($search_term)
+		{
+			$query = $GLOBALS['DB']->query("SELECT * FROM patrons WHERE name LIKE '%{$search_term}%'");
+			$all_patrons = $query->fetchAll(PDO::FETCH_ASSOC);
+
+			$found_patrons = array();
+			foreach ($all_patrons as $patron) {
+				$name = $patron['name'];
+				$id = $patron['id'];
+				$new_patron = new Patron($name, $id);
+				array_push($found_patrons, $new_patron);
+			}
+			return $found_patrons;
+		}
 	}
  ?>

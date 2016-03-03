@@ -114,6 +114,24 @@
 
             $this->assertEquals($new_name, $test_patron->getName());
         }
+
+        function test_search()
+        {
+            $test_name = "John Fisher";
+			$id = null;
+			$test_patron = new Patron($test_name, $id);
+            $test_patron->save();
+
+            $test_name2 = "Paul Allen";
+			$test_patron2 = new Patron($test_name2, $id);
+            $test_patron2->save();
+
+            $search_term = "John";
+
+            $result = Patron::search($search_term);
+
+            $this->assertEquals([$test_patron], $result);
+        }
 	}
 
 ?>
