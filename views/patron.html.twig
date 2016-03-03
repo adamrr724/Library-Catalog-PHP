@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Library Catalog</title>
+    </head>
+    <body>
+        <h1>Patron Page</h1>
+        {% if patrons is not empty %}
+           <ul>
+           {% for patron in patrons %}
+                   <h3>{{ patron.getName }}</h3>
+                    <p><a href="/patrons/{{ patron.getId }}/edit">Check Out a Book</a></p>
+           {% endfor %}
+           </ul>
+       {% else %}
+       <p>
+           No patrons added yet!
+       </p>
+       {% endif %}
+        <p>
+            <a href="/">HOME</a>
+        </p>
+    </body>
+</html>

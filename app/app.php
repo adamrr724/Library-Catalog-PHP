@@ -121,7 +121,16 @@
     $app->post("/patrons/add", function() use ($app) {
         $name = $_POST['name'];
         $patron = new Patron($name);
-       return $app['twig']->render('patron.html.twig', $arrayName = array('patron' => $patron));
+        $patron->save();
+        $patrons = array();
+        array_push($patrons, $patron);
+       return $app['twig']->render('patron.html.twig', $arrayName = array('patrons' => $patrons));
+    });
+
+    $app->get("/patrons/search", function() use ($app) {
+        $search_term = $_GET['name'];
+        $patrons = Patron::search($search_term);
+        return $app['twig']->render('patron.html.twig', array('patrons' => $patrons));
     });
 
     return $app;
