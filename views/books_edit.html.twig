@@ -19,7 +19,7 @@
              <input name="_method" type="hidden" value="patch">
             <label for="title">New Title</label>
             <input type="text" name="title" value="">
-            <button type="submit" name="button">Update!</button>
+            <button type="submit" class="btn btn-primary" name="button">Update!</button>
         </form>
         <h3>Add an Author</h3>
         <form action="/book/{{ book.getId }}/add_author" method="post">
@@ -28,17 +28,18 @@
              <input type="text" name="first_name">
             <label for="last_name">Author Last Name</label>
             <input type="text" name="last_name">
-            <button type="submit" name="button">Add</button>
+            <button type="submit" class="btn btn-primary" name="button">Add</button>
         </form>
 <br>
         <form action="/book/{{ book.getId }}/delete" method="post">
              <input name="_method" type="hidden" value="delete">
-            <button type="submit" name="button">Delete Button</button>
+            <button type="submit" class="btn btn-danger" name="button">Delete Book</button>
         </form>
-
+<br>
         <form action="/book/{{ book.getId }}/add_copy" method="post">
-          <button type="submit" name="button">Add a copy of this book!</button>
+          <button type="submit" class="btn btn-primary" name="button">Add a copy of this book!</button>
         </form>
+<br>
         <p>
             <a href="/">HOME</a>
         </p>

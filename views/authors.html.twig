@@ -27,9 +27,11 @@
                    {% else %}
                        <p>This author has no books.</p>
                    {% endif %}
+                    <br>
                    <form action="/author/{{ author.getId }}/addbook" method="get">
-                     <button type="submit" name="button">Add another book</button>
+                     <button type="submit" class="btn btn-primary">Add another book</button>
                    </form>
+                   <br>
                     <p><a href="/authors/{{ author.getId }}/edit">Edit this Author</a></p>
                    </form>
            {% endfor %}
@@ -42,7 +44,7 @@
         <form action="/authors/search" method="get">
             <label for="title">Search by Author Last Name</label>
             <input type="text" name="title">
-            <button type="submit" name="button">Search</button>
+            <button type="submit" class="btn btn-success" name="button">Search</button>
         </form>
 
         <p>

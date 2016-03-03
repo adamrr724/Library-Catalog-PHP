@@ -19,17 +19,15 @@
         <form action="/patron/{{ patron.getId }}/books/search" method="get">
             <label for="title">Book Title</label>
             <input type="text" name="title">
-            <button type="submit" name="button">Search</button>
+            <button type="submit" class="btn btn-success" name="button">Search</button>
         </form>
         <h3>Or look by author:</h3>
         <form action="/patron/{{ patron.getId }}/authors/search" method="get">
             <label for="last_name">Author Last Name</label>
             <input type="text" name="last_name">
-            <button type="submit" name="button">Search</button>
+            <button type="submit" class="btn btn-success" name="button">Search</button>
         </form>
-        <p>
-            <a href="/books/add">Add</a> a Book to the Catalog
-        </p>
+        <br>
         <p>
             <a href="/">HOME</a>
         </p>

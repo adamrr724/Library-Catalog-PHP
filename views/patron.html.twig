@@ -23,7 +23,7 @@
 
                     <form action="/patron/{{ patron.getId }}/delete" method="post">
                       <input name="_method" type="hidden" value="delete">
-                      <button type="submit" name="button">Delete User</button>
+                      <button type="submit" class="btn btn-danger" name="button">Delete User</button>
                     </form>
            {% endfor %}
            </ul>

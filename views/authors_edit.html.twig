@@ -21,13 +21,14 @@
             <input type="text" name="first_name" value="{{ author.getFirstName }} ">
             <label for="last_name">New Last Name</label>
             <input type="text" name="last_name" value="{{ author.getLastName }} ">
-            <button type="submit" name="button">Update!</button>
+            <button type="submit" class="btn btn-primary" name="button">Update!</button>
         </form>
-
+<br>
         <form action="/author/{{ author.getId }}/delete" method="post">
              <input name="_method" type="hidden" value="delete">
-            <button type="submit" name="button">Delete Button</button>
+            <button type="submit" class="btn btn-danger" name="button">Delete Button</button>
         </form>
+<br>
         <p>
             <a href="/">HOME</a>
         </p>

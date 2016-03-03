@@ -23,7 +23,7 @@
                    <li>{{ author.getFirstName }} {{ author.getLastName }}</li>
                    <form action="/patron/{{ book.getId }}/return" method="post">
                       <input id="patron_id" name="patron_id" type="hidden" value="{{ patron.getId }}">
-                     <button type="submit" name="button">Return Book</button>
+                     <button type="submit" class="btn btn-primary" name="button">Return Book</button>
                    </form>
                   {% endfor %}
                 </ul>
