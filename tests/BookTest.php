@@ -216,6 +216,38 @@
 				$this->assertEquals(1, $test_book->countCopies());
 				}
 
+				function test_checkout()
+				{
+					$test_title = "The Magicians";
+					$id = null;
+					$test_book = new Book($test_title, $id);
+					$test_book->save();
+
+					$test_name = "John Fisher";
+	        $test_patron = new Patron($test_name, $id);
+					$test_patron->save();
+
+					$test_book->addCopy();
+					$test_book->addCopy();
+
+					$test_book->checkout($test_patron->getId());
+
+					$this->assertEquals(1, $test_book->countCheckout());
+				}
+
+				function test_countCheckout()
+				{
+				$test_title = "The Magicians";
+				$id = null;
+				$test_book = new Book($test_title, $id);
+				$test_book->save();
+
+				$test_book->addCopy();
+				$test_book->addCopy();
+
+				$this->assertEquals(2, $test_book->countCheckout());
+				}
+
     }
 
 ?>

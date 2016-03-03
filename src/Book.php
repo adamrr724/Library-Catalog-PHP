@@ -130,5 +130,31 @@
         return $copies_count;
     }
 
+		function checkout($patron_id)
+		{
+			if ($this->countCheckout() > 0) {
+				$query = $GLOBALS['DB']->query("SELECT id FROM copies WHERE book_id = {$this->getId()} AND checkout = 0 LIMIT 1;");
+				$copy_mid_step = $query->fetchAll(PDO::FETCH_ASSOC);
+				$copy_id = $copy_mid_step[0]['id'];
+				$GLOBALS['DB']->exec("UPDATE copies SET checkout = 1 WHERE book_id = {$this->getId()} AND checkout = 0 LIMIT 1;");
+				$GLOBALS['DB']->exec("INSERT INTO checkouts (book_id, patron_id, due_date, copy_id) VALUES ({$this->getId()}, {$patron_id}, '2016-02-14', {$copy_id});");
+			}
+		}
+
+		function countCheckout()
+		{
+			$query = $GLOBALS['DB']->query("SELECT copies.* FROM
+          books JOIN copies ON (books.id = copies.book_id)
+          WHERE books.id = {$this->getId()}");
+
+			$copies = $query->fetchAll(PDO::FETCH_ASSOC);
+			$copies_count = 0;
+			foreach ($copies as $copy) {
+					if($copy['checkout'] == 0){
+						$copies_count++;
+					}
+			} return $copies_count;
+		}
+
 	}
  ?>

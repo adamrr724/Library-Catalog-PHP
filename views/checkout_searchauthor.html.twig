@@ -21,7 +21,7 @@
                    {% if author.getBooks is not empty %}
                    <ul>
                        {% for book in author.getBooks %}
-                       <li>{{ book.getTitle }} | # of copies:{{ book.countCopies }} </li>
+                       <li>{{ book.getTitle }} | # of copies: {{ book.countCopies }} </li>
                        <p><a href="/">Checkout this book</a></p>
                        {% endfor %}
                    </ul>
