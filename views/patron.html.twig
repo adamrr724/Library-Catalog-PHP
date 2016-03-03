@@ -19,6 +19,8 @@
            {% for patron in patrons %}
                    <h3>{{ patron.getName }}</h3>
                     <p><a href="/patron/{{ patron.getId }}/checkout">Check Out a Book</a></p>
+                    <p><a href="/patron/{{ patron.getId }}/mybooks">See your Books | Return a Book</a></p>
+
                     <form action="/patron/{{ patron.getId }}/delete" method="post">
                       <input name="_method" type="hidden" value="delete">
                       <button type="submit" name="button">Delete User</button>

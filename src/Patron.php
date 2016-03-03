@@ -88,5 +88,20 @@
 		{
 			 $GLOBALS['DB']->exec("DELETE FROM patrons WHERE id = {$this->getId()};");
 		}
+
+		function getPatronBooks()
+		{
+			$query = $GLOBALS['DB']->query("SELECT checkouts.* FROM
+          patrons JOIN checkouts ON (patrons.id = checkouts.patron_id)
+          WHERE patrons.id = {$this->getId()}");
+			$all_checkouts = $query->fetchAll(PDO::FETCH_ASSOC);
+
+			$books = array();
+			foreach ($all_checkouts as $checkout) {
+				$book_id = $checkout['book_id'];
+				array_push($books, $book_id);
+			}
+			 return $books;
+		}
 	}
  ?>

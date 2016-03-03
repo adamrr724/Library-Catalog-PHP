@@ -1,0 +1,37 @@
+<head>
+    <meta charset="utf-8">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <title>Library Catalog</title>
+</head>
+<body>
+    <h1>{{ patron.getName }}!</h1>
+    <h3>You have checked out the following books:</h3>
+    {% if books is not empty %}
+       <ul>
+       {% for book in books %}
+               <h3>{{ book.getTitle }}</h3>
+               {% if book.getAuthors is not empty %}
+               <ul>
+                   {% for author in book.getAuthors %}
+                   <li>{{ author.getFirstName }} {{ author.getLastName }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+            {% endfor %}
+       {% else %}
+         <p>You have not checked out any books.</p>
+     {% endif %}
+
+    <a href="/patron/{{ patron.getId }}">Your profile</a>
+    <p>
+        <a href="/">HOME</a>
+    </p>
+</body>
+</html>

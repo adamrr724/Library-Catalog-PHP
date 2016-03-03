@@ -141,6 +141,13 @@
        return $app['twig']->render('sign_in.html.twig');
     });
 
+    $app->get("/patron/{id}", function($id) use ($app) {
+       $patron = Patron::find($id);
+       $patrons = array();
+       array_push($patrons, $patron);
+       return $app['twig']->render('patron.html.twig', array('patrons' => $patrons));
+    });
+
     $app->post("/patrons/add", function() use ($app) {
         $name = $_POST['name'];
         $patron = new Patron($name);
@@ -181,6 +188,20 @@
        return $app['twig']->render('checkout_searchauthor.html.twig', array('patron' => $patron, 'authors' => $authors));
     });
 
+    $app->get("/checkout/{id}", function($id) use ($app) {
+       $book = Book::find($id);
+       $patron_id = $_GET['patron_id'];
+       $patron = Patron::find($patron_id);
+       $book->checkout($patron_id);
+       return $app['twig']->render('checked_out.html.twig', array('patron' => $patron, 'book' => $book));
+    });
+
+    $app->get("/patron/{id}/mybooks", function($id) use ($app) {
+       $patron = Patron::find($id);
+       $books = $patron->getPatronBooks();
+       $all_books = Book::findCheckoutBooks($books);
+       return $app['twig']->render('mybooks.html.twig', array('books' => $all_books, 'patron' => $patron));
+    });
 
 
 

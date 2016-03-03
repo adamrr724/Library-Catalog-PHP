@@ -63,6 +63,23 @@
 			return $found_book;
 		}
 
+		static function findCheckoutBooks($books)
+		{
+			$all_books = Book::getAll();
+			$found_book = array();
+
+			foreach ($books as $book) {
+				foreach($all_books as $one_book) {
+					$book_id = $one_book->getId();
+					if ($book_id == $book) {
+						array_push($found_book, $one_book);
+					}
+				}
+			}
+			return $found_book;
+		}
+
+
 		function update($new_title)
 		{
 		   $GLOBALS['DB']->exec("UPDATE books SET title = '{$new_title}' WHERE id={$this->getId()};");
