@@ -110,5 +110,25 @@
 			}
 			return $found_books;
 		}
+
+		function addCopy()
+		{
+			$GLOBALS['DB']->exec("INSERT INTO copies (book_id) VALUES ({$this->getId()});");
+			// $this->id = $GLOBALS['DB']->lastInsertId();
+		}
+
+		function countCopies()
+    {
+        $query = $GLOBALS['DB']->query("SELECT copies.* FROM
+            books JOIN copies ON (books.id = copies.book_id)
+            WHERE books.id = {$this->getId()}");
+        $copies = $query->fetchAll(PDO::FETCH_ASSOC);
+        $copies_count = 0;
+        foreach ($copies as $copy) {
+            $copies_count++;
+        }
+        return $copies_count;
+    }
+
 	}
  ?>
