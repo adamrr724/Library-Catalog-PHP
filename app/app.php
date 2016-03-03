@@ -203,6 +203,14 @@
        return $app['twig']->render('mybooks.html.twig', array('books' => $all_books, 'patron' => $patron));
     });
 
+    $app->post("/patron/{id}/return", function($id) use ($app) {
+      $book = Book::find($id);
+      $patron_id = $_POST['patron_id'];
+      $patron = Patron::find($patron_id);
+      $book->returnBook();
+      return $app['twig']->render('returnedbook.html.twig', array('patron' => $patron, 'book' => $book));
+   });
+
 
 
 

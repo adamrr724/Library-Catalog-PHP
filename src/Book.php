@@ -90,7 +90,6 @@
 		{
 		   $GLOBALS['DB']->exec("DELETE FROM books WHERE id = {$this->getId()};");
 		   $GLOBALS['DB']->exec("DELETE FROM books_authors WHERE book_id = {$this->getId()};");
-
 		}
 
 		function addAuthor($author)
@@ -156,6 +155,15 @@
 				$GLOBALS['DB']->exec("UPDATE copies SET checkout = 1 WHERE book_id = {$this->getId()} AND checkout = 0 LIMIT 1;");
 				$GLOBALS['DB']->exec("INSERT INTO checkouts (book_id, patron_id, due_date, copy_id) VALUES ({$this->getId()}, {$patron_id}, '2016-02-14', {$copy_id});");
 			}
+		}
+
+		function returnBook()
+		{
+			$query = $GLOBALS['DB']->query("SELECT id FROM copies WHERE book_id = {$this->getId()} AND checkout = 1 LIMIT 1;");
+			$copy_mid_step = $query->fetchAll(PDO::FETCH_ASSOC);
+			$copy_id = $copy_mid_step[0]['id'];
+			$GLOBALS['DB']->exec("UPDATE copies SET checkout = 0 WHERE book_id = {$this->getId()} AND checkout = 1 LIMIT 1;");
+			$GLOBALS['DB']->exec("DELETE FROM checkouts WHERE copy_id = {$copy_id};");
 		}
 
 		function countCheckout()
